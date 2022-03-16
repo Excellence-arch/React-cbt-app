@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from './Button';
+import Options from './Options';
 
 const DisplayQuestions = ({allQuestions}) => {
 
@@ -33,10 +34,14 @@ const DisplayQuestions = ({allQuestions}) => {
             <div key={currentQuestion}>
                 <p>Question {currentQuestion+1}</p>
                 <p>{allQuestions[currentQuestion].question}</p>
-                <p>{allQuestions[currentQuestion].optionA}</p>
-                <p>{allQuestions[currentQuestion].optionB}</p>
+                <Options name={"Option"+ currentQuestion} value={allQuestions[currentQuestion].optionA} />
+                <Options name={"Option"+ currentQuestion} value={allQuestions[currentQuestion].optionB} />
+                <Options name={"Option"+ currentQuestion} value={allQuestions[currentQuestion].optionC} />
+                <Options name={"Option"+ currentQuestion} value={allQuestions[currentQuestion].optionD} />
+                {/* <p>{allQuestions[currentQuestion].optionA}</p> */}
+                {/* <p>{allQuestions[currentQuestion].optionB}</p>
                 <p>{allQuestions[currentQuestion].optionC}</p>
-                <p>{allQuestions[currentQuestion].optionD}</p>
+                <p>{allQuestions[currentQuestion].optionD}</p> */}
                 {currentQuestion == allQuestions.length - 1 ? 
                 <div>
                     <Button name="previous" color='info' addQuestions={previous} />

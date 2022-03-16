@@ -9,6 +9,7 @@ const AddQuestion = ({addQuestions}) => {
     const [optionB, setOptionB] = useState("");
     const [optionC, setOptionC] = useState("");
     const [optionD, setOptionD] = useState("");
+    const [correctOption, setCorrectOption] = useState("");
 
 
     return(
@@ -18,7 +19,8 @@ const AddQuestion = ({addQuestions}) => {
             <Input placeholder="Option B" handleChange={e => setOptionB(e.target.value)} val={optionB}/>
             <Input placeholder="Option C" handleChange={e => setOptionC(e.target.value)} val={optionC}/>
             <Input placeholder="Option D" handleChange={e => setOptionD(e.target.value)} val={optionD}/>
-            <Button name="Add Question" addQuestions={()=> addQuestions({question, optionA, optionB, optionC, optionD})} color="info"/>
+            <Input placeholder="Correct Option" handleChange={e => setCorrectOption(e.target.value)} val={correctOption}/>
+            <Button name="Add Question" addQuestions={()=> addQuestions({question, optionA, optionB, optionC, optionD, correctOption})} color="info"/>
         </>
     )
 }
