@@ -1,33 +1,26 @@
-import React, { Component } from 'react';
-import Input from './Input';
-import Button from './Button';
+import Button from "./Button";
+import Input from "./Input";
+import { useState } from "react";
 
-class Questions extends Component {
-    state = { newQuestion:[{name: "Question", val: ""}, {name: "a", val: ""}, {name: "b", val: ""}, {name: "c", val:""}, {name: "d", val: ""}, {name: "correctOption", val: ""}]}
+const AddQuestion = ({addQuestions}) => {
 
-    handleChange = e => {
-        this.setState({[e.target.name]: e.target.value})
-    }
+    const [question, setQuestion] = useState("");
+    const [optionA, setOptionA] = useState("");
+    const [optionB, setOptionB] = useState("");
+    const [optionC, setOptionC] = useState("");
+    const [optionD, setOptionD] = useState("");
 
-    addWhole = () => {
-        let {Question, a, b, c, d, correctOption} = this.state
-        // console.log(Question, a, b, c, d, correctOption)
-        this.props.addNewQuestion({que: Question, options: {a: a, b: b, c: c, d: d}, correct: correctOption})
-        // this.setState({Question: "", a: "", b: "", c: "", d: "", correctOption: ""})
-    }
-    render() { 
-        let {handleChange, addWhole} = this;
-        let {newQuestion} = this.state
-        return ( 
-            <>
-                {/* <Input name={newQuestion[0].name} handleChange={handleChange} vals={newQuestion[0].val} placeHolder="Question"/> <br/> */}
-                {newQuestion.map((opts, i)=> (
-                    <Input key={i} name={opts.name} vals={opts.value} handleChange={handleChange} placeHolder={`${opts.name}`}/>
-                ))}
-                <Button addWhole={addWhole} val="Add Questions"/>
-            </>
-         );
-    }
+
+    return(
+        <>
+            <Input placeholder="Question" handleChange={e => setQuestion(e.target.value)} val={question}/>
+            <Input placeholder="Option A" handleChange={e => setOptionA(e.target.value)} val={optionA}/>
+            <Input placeholder="Option B" handleChange={e => setOptionB(e.target.value)} val={optionB}/>
+            <Input placeholder="Option C" handleChange={e => setOptionC(e.target.value)} val={optionC}/>
+            <Input placeholder="Option D" handleChange={e => setOptionD(e.target.value)} val={optionD}/>
+            <Button name="Add Question" addQuestions={()=> addQuestions({question, optionA, optionB, optionC, optionD})} color="info"/>
+        </>
+    )
 }
- 
-export default Questions;
+
+export default AddQuestion;

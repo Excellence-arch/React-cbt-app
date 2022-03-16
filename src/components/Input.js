@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
 
-class Input extends Component {
-    render() { 
-        let {vals, handleChange, placeHolder, name} = this.props;
-        return ( 
-            <>
-                <input type="text" value={vals} name={name} onChange={handleChange} placeholder={placeHolder} />
-            </>
-         );
-    }
+const Input = ({placeholder, handleChange, val}) => {
+
+    return(
+        <>
+            <input type="text" className="form-control my-2" placeholder={placeholder} onChange={handleChange} value={val}/>
+        </>
+    )
 }
- 
-export default Input;
+
+export default Input

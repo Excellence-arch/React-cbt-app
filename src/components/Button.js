@@ -1,14 +1,9 @@
-import React, { Component } from 'react';
-
-class Button extends Component {
-    render() { 
-        let {addWhole, val} = this.props;
-        return ( 
-            <>
-                <button onClick={addWhole}>{val}</button>
-            </>
-         );
-    }
+const Button = ({name, color, addQuestions}) => {
+    return(
+        <>
+            <button className={"btn-"+color+" btn"} onClick={addQuestions} >{name}</button>
+        </>
+    )
 }
- 
+
 export default Button;
