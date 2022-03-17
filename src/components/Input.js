@@ -3,7 +3,7 @@ const Input = ({placeholder, handleChange, val}) => {
 
     return(
         <>
-            <input type="text" className="form-control my-2" placeholder={placeholder} onChange={handleChange} value={val}/>
+            <input type="text" className="form-control my-2 w-100" placeholder={placeholder} onChange={handleChange} value={val}/>
         </>
     )
 }

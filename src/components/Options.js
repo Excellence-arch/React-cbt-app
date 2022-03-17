@@ -1,7 +1,7 @@
-const Options = ({name, value}) => {
+const Options = ({names, val, handleSelect}) => {
     return(
         <>
-            <input type="radio" name={name} value={value}/>
+            <input type="radio" name={names} onChange={handleSelect} value={val} />
         </>
     )
 }
