@@ -13,6 +13,20 @@ const AddQuestion = ({addQuestions}) => {
     const [correctOption, setCorrectOption] = useState("");
 
 
+    const setAdd = () => {
+        if(question !== "" && optionA !== "" && optionB !== "" && optionC !== "" && optionD !== "") {
+            addQuestions({question, optionA, optionB, optionC, optionD, correctOption});
+            setQuestion("");
+            setOptionA("");
+            setOptionB("");
+            setOptionC("");
+            setOptionD("");
+            setCorrectOption("");
+        } else{
+            alert("Please enter your question, options and answer");
+        }
+    }
+
     return(
         <>
             <Input placeholder="Question" handleChange={e => setQuestion(e.target.value)} val={question}/>
@@ -20,8 +34,8 @@ const AddQuestion = ({addQuestions}) => {
             <Input placeholder="Option B" handleChange={e => setOptionB(e.target.value)} val={optionB}/> <Options names={`correct`} handleSelect={e => setCorrectOption(e.target.value)} val={`Option B`}/>
             <Input placeholder="Option C" handleChange={e => setOptionC(e.target.value)} val={optionC}/> <Options names={`correct`} handleSelect={e => setCorrectOption(e.target.value)} val={`Option C`}/>
             <Input placeholder="Option D" handleChange={e => setOptionD(e.target.value)} val={optionD}/> <Options names={`correct`} handleSelect={e => setCorrectOption(e.target.value)} val={`Option D`}/>
-            {/* <Input placeholder="Correct Option" handleChange={e => setCorrectOption(e.target.value)} val={correctOption}/> */}
-            <Button name="Add Question" addQuestions={()=> addQuestions({question, optionA, optionB, optionC, optionD, correctOption})} color="info"/>
+            <Button name="Add Question" addQuestions={setAdd} color="info"/>
+
         </>
     )
 }

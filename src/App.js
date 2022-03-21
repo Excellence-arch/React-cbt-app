@@ -7,17 +7,24 @@ const App = () => {
 
   const [allQuestions, setAllQuestions] = useState([]);
   const [score, setScore] = useState(0);
+  const [ready, setReady] = useState(false);
   const [displayScore, setDisplayScore] = useState(false);
 
   const addQuestions = (newQuestion) => {
     setAllQuestions([...allQuestions, newQuestion]);
-    // console.log(allQuestions);
   }
 
   const submit = (scores) => {
+    // setAllScore(scores);
     let newScore = scores.reduce((i, j) => i + j, 0);
     setScore(newScore);
+    setReady(false);
     setDisplayScore(true);
+  }
+
+  const realReady = (gets) => {
+    setReady(gets);
+    setDisplayScore(false);
   }
 
   return(
@@ -29,11 +36,11 @@ const App = () => {
           </div>
           {!displayScore ?
             <div className="col-6">
-              <DisplayQuestions allQuestions={allQuestions} submit={submit}/>
+              <DisplayQuestions allQuestions={allQuestions} ready={ready} realReady={realReady} submit={submit}/>
             </div>
           :
             <div className="col-6">
-              <ScoreBoard score={score} total={allQuestions.length}/>
+              <ScoreBoard score={score} total={allQuestions.length} realReady={realReady}/>
             </div>
           }
         </div>
