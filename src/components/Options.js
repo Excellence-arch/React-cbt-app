@@ -1,9 +1,10 @@
-const Options = ({names, val, handleSelect}) => {
-    return(
-        <>
-            <input type="radio" name={names} onChange={handleSelect} value={val} />
-        </>
-    )
+
+const Options = ({name, change, vals}) => {
+  return (
+    <>
+        <input type="radio" name={name} onChange={change} value={vals}/>
+    </>
+  )
 }
 
 export default Options;

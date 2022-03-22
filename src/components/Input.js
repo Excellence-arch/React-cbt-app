@@ -1,11 +1,10 @@
 
-const Input = ({placeholder, handleChange, val}) => {
-
-    return(
-        <>
-            <input type="text" className="form-control my-2 w-100" placeholder={placeholder} onChange={handleChange} value={val}/>
-        </>
-    )
+const Input = ({change, vals, placeholder, types}) => {
+  return (
+    <>
+        <input type={types} placeholder={placeholder} onChange={change} value={vals} className="my-2 form-control"/>
+    </>
+  )
 }
 
-export default Input
+export default Input;

@@ -1,52 +1,72 @@
-import AddQuestion from "./components/AddQuestion";
-import { useState } from 'react';
-import DisplayQuestions from "./components/DisplayQuestions";
-import ScoreBoard from "./components/ScoreBoard";
+import { useState } from 'react'
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import AddQuestions from './components/AddQuestions';
+import Admin from './components/Admin';
+import BeforeExam from './components/BeforeExam';
+// import DisplayUser from './components/DisplayUser';
+import Home from './components/Home';
+import NavBar from './components/NavBar';
+import Scoreboard from './components/Scoreboard';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 const App = () => {
 
+  const [allStudents, setAllStudents] = useState([]);
+  const [onlineUser, setOnlineUser] = useState("");
   const [allQuestions, setAllQuestions] = useState([]);
-  const [score, setScore] = useState(0);
-  const [ready, setReady] = useState(false);
-  const [displayScore, setDisplayScore] = useState(false);
 
-  const addQuestions = (newQuestion) => {
+
+  const navigate = useNavigate();
+
+  const login = (loginDets) => {
+    let found = allStudents.find((val, i)=> val.email == loginDets.email && val.password == loginDets.password);
+    setOnlineUser(found);
+    if (found) {
+      navigate(`/${found.id}`);
+    } else {
+      alert("Invalid email or password");
+    }
+  }
+
+  const signUp = (signDets) => {
+    let found = allStudents.find((val, _) => val.email == signDets.email);
+    if (found) {
+      alert("This email has already been registered");
+    } else {
+      let newStudent = signDets;
+      newStudent.score = 0;
+      newStudent.id = allStudents.length;
+      setAllStudents([...allStudents, newStudent])
+    }
+  }
+
+  const addNewQuestion = (newQuestion) => {
     setAllQuestions([...allQuestions, newQuestion]);
   }
 
-  const submit = (scores) => {
-    // setAllScore(scores);
-    let newScore = scores.reduce((i, j) => i + j, 0);
-    setScore(newScore);
-    setReady(false);
-    setDisplayScore(true);
+  const submit = (allAnswers, studentId) => {
+    let student = allStudents;
+    let newScore = allAnswers.reduce((i, j) => i + j, 0);
+    student[studentId].score = newScore;
+    setAllStudents(student);
+    navigate("/scoreboard");
   }
 
-  const realReady = (gets) => {
-    setReady(gets);
-    setDisplayScore(false);
-  }
-
-  return(
+  return (
     <>
-      <section className="container-fluid">
-        <div className="row">
-          <div className="col-6 border border-right">
-            <AddQuestion addQuestions={addQuestions}/>
-          </div>
-          {!displayScore ?
-            <div className="col-6">
-              <DisplayQuestions allQuestions={allQuestions} ready={ready} realReady={realReady} submit={submit}/>
-            </div>
-          :
-            <div className="col-6">
-              <ScoreBoard score={score} total={allQuestions.length} realReady={realReady}/>
-            </div>
-          }
-        </div>
-      </section>
+      <NavBar/>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/:id/*" element={<BeforeExam submit={submit} onlineUser={onlineUser} len={allStudents.length} allQuestions={allQuestions}/>}/>
+        <Route path="/sign-in" element={<SignIn checkLogin={login}/>}/>
+        <Route path="/sign-up" element={<SignUp checkSignUp={signUp}/>}/>
+        <Route path="/admin/*" element={<Admin addNewQuestion={addNewQuestion} allStudents={allStudents} />}/>
+        <Route path="/scoreboard" element={<Scoreboard allStudents={allStudents}/>}/>
+        <Route path="*" element={<h2>Error 404</h2>} />
+      </Routes>
     </>
   )
 }
 
-export default App
+export default App;
