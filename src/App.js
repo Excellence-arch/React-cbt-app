@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import AddQuestions from './components/AddQuestions';
+// import AddQuestions from './components/AddQuestions';
 import Admin from './components/Admin';
 import BeforeExam from './components/BeforeExam';
 // import DisplayUser from './components/DisplayUser';

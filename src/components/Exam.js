@@ -59,7 +59,7 @@ const Exam = ({allQuestions, submitAnswers}) => {
                             <p>
                                 <Options change={e => checkAns(e)} vals={allQuestions[cur].optionD} name={`question${cur}`}/> {allQuestions[cur].optionD}
                             </p>
-                            {cur == 0 ? 
+                            {cur == 0 && allQuestions.length !== 1 ? 
                             <p>
                                 <Buttons name="Submit" handle={submits} color="info"/>
                                 <Buttons name="Next" handle={next} color="info"/>
