@@ -2,9 +2,9 @@ import React from 'react'
 
 const DisplayAllQuestions = ({allQuestions}) => {
   return (
-    <div className="container">
+    <div className="container text-center">
       {allQuestions.map((val, i) => (
-        <div>
+        <div key={i}>
           <p>{val.question}</p>
           <p>
             <span>A. {val.optionA}</span>
